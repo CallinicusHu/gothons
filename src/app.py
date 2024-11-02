@@ -36,8 +36,8 @@ def game():
         return redirect(url_for("game"))
 
 
-    # YOU SHOULD CHANGE THIS IF YOU PUT ON THE INTERNET
-    app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+# YOU SHOULD CHANGE THIS IF YOU PUT ON THE INTERNET
+app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
-    if __name__ == "__main:__":
-        app.run()
+if __name__ == "__main__":
+    app.run()
