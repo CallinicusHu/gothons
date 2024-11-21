@@ -5,12 +5,14 @@ class Room(object):
         self.description = description
         self.paths = {}
 
-    def go(self, direction):
-        return self.paths.get(direction, None)
+    def go(self, action):
+            if action not in self.paths:
+                return self.paths.get("*")
+
+            return self.paths.get(action) #töröltem egy nonet
 
     def add_paths(self, paths):
         self.paths.update(paths)
-
 
 central_corridor = Room("Central Corridor",
                         """
@@ -97,6 +99,7 @@ generic_death = Room("death", "You died.")
 the_bridge.add_paths({
     'throw the bomb': generic_death,
     'slowly place the bomb': escape_pod
+
 })
 
 laser_weapon_armory.add_paths({
@@ -110,6 +113,14 @@ central_corridor.add_paths({
     'tell a joke': laser_weapon_armory
 })
 
+map = {"central_corridor": central_corridor,
+       "laser_weapon_armory": laser_weapon_armory,
+       "the_bridge": the_bridge,
+       "escape_pod": escape_pod,
+       "generic_death": generic_death,
+       "the_end_winner": the_end_winner,
+       "the_end_loser": the_end_loser}
+
 START = 'central_corridor'
 
 
@@ -118,7 +129,7 @@ def load_room(name):
     There is a potential security problem here.
     Who gets to set name? Can that expose a variable?
     """
-    return globals().get(name)
+    return map.get(name)
 
 
 def name_room(room):
